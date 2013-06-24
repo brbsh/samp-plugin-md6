@@ -362,10 +362,10 @@ enum {
       else (result) = NULL;                                                 \
     } while (0)
 
-uint16_t * AMXAPI amx_Align16(uint16_t *v);
-uint32_t * AMXAPI amx_Align32(uint32_t *v);
+//uint16_t * AMXAPI amx_Align16(uint16_t *v);
+//uint32_t * AMXAPI amx_Align32(uint32_t *v);
 #if defined _I64_MAX || defined HAVE_I64
-  uint64_t * AMXAPI amx_Align64(uint64_t *v);
+//  uint64_t * AMXAPI amx_Align64(uint64_t *v);
 #endif
 int AMXAPI amx_Allot(AMX *amx, int cells, cell *amx_addr, cell **phys_addr);
 int AMXAPI amx_Callback(AMX *amx, cell index, cell *result, cell *params);

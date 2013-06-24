@@ -270,7 +270,7 @@ int md6_compress( md6_word *C,
   if ( C == NULL) return MD6_NULL_C;
   if ( r<0 || r > md6_max_r) return MD6_BAD_r;
 
-  if ( A == NULL) A = calloc(r*c+n,sizeof(md6_word));
+  if ( A == NULL) A = (md6_word *)calloc(r*c+n,sizeof(md6_word));
   if ( A == NULL) return MD6_OUT_OF_MEMORY;
 
   memcpy( A, N, n*sizeof(md6_word) );    /* copy N to front of A */
