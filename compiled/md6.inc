@@ -26,7 +26,7 @@
 
 native md6(dest[], source[], size = sizeof dest);
 native md6_file(dest[], file[], size = sizeof dest);
-native md6_hmac(dest[], source[], key[], ssize = sizeof source, ksize = sizeof key);
+native md6_hmac(dest[], source[], key[], size = sizeof dest);
 
 
 
