@@ -16,6 +16,13 @@
 
 
 
+#define arguments(n) \
+	(params[0] == (n << 2))
+
+
+
+
+
 typedef void (*logprintf_t)(char *format, ...);
 
 

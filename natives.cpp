@@ -33,21 +33,28 @@ const AMX_NATIVE_INFO amxNatives::md6Natives[] =
 // native md6(dest[], source[], size = sizeof dest);
 cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 {
+	if(!arguments(3))
+	{
+		logprintf("\nMD6 warning: Invalid argument count (%i) in native 'md6'\n", (params[0] >> 2));
+
+		return NULL;
+	}
+
 	char *buffer = NULL;
 	char *dest = NULL;
 	unsigned char *result = NULL;
 	cell *addr = NULL;
+	int length = params[3];
 
-	if(!params[3])
+	if(length < 129)
 	{
-		logprintf("\nMD6 warning: NULL string size passed to native 'md6'\n");
+		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
 
 		return NULL;
 	}
 
 	amx_GetAddr(amx, params[1], &addr);
 	amx_StrParam(amx, params[2], buffer);
-	int length = (params[3] + 1);
 
 	if(buffer == NULL)
 	{
@@ -62,9 +69,10 @@ cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 
 	dest = (char *)malloc(length);
 
-	binary_hex_represintation(result, dest, ((length - 1) / 2));
+	binary_hex_represintation(result, dest, (length / 2));
 	free(result);
 
+	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);
@@ -75,24 +83,32 @@ cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 
 
 
+// native md6_file(dest[], file[], size = sizeof dest);
 cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 {
+	if(!arguments(3))
+	{
+		logprintf("\nMD6 warning: Invalid argument count (%i) in native 'md6_file'\n", (params[0] >> 2));
+
+		return NULL;
+	}
+
 	char *file = NULL;
 	char *dest = NULL;
 	unsigned char *result = NULL;
 	cell *addr = NULL;
+	int length = params[3];
 
-	if(!params[3])
+	if(length < 129)
 	{
-		logprintf("\nMD6 warning: NULL string size passed to native 'md6_file'\n");
+		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
 
 		return NULL;
 	}
 
 	amx_GetAddr(amx, params[1], &addr);
 	amx_StrParam(amx, params[2], file);
-	int length = (params[3] + 1);
-
+	
 	if(file == NULL)
 	{
 		logprintf("\nMD6 warning: NULL file passed to native 'md6_file'\n");
@@ -124,9 +140,10 @@ cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 	free(dest);
 	dest = (char *)malloc(length);
 
-	binary_hex_represintation(result, dest, ((length - 1) / 2));
+	binary_hex_represintation(result, dest, (length / 2));
 	free(result);
 
+	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);
@@ -137,17 +154,26 @@ cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 
 
 
+// native md6_hmac(dest[], source[], key[], size = sizeof dest);
 cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 {
+	if(!arguments(4))
+	{
+		logprintf("\nMD6 warning: Invalid argument count (%i) in native 'md6_hmac'\n", (params[0] >> 2));
+
+		return NULL;
+	}
+
 	char *buffer = NULL;
 	char *dest = NULL;
 	char *hmac = NULL;
 	unsigned char *result = NULL;
 	cell *addr = NULL;
+	int length = params[4];
 
-	if(!params[4])
+	if(length < 129)
 	{
-		logprintf("\nMD6 warning: NULL string size passed to native 'md6_hmac'\n");
+		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
 
 		return NULL;
 	}
@@ -155,7 +181,6 @@ cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 	amx_GetAddr(amx, params[1], &addr);
 	amx_StrParam(amx, params[2], buffer);
 	amx_StrParam(amx, params[3], hmac);
-	int length = (params[4] + 1);
 
 	if(buffer == NULL)
 	{
@@ -177,9 +202,10 @@ cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 	
 	dest = (char *)malloc(length);
 
-	binary_hex_represintation(result, dest, ((length - 1) / 2));
+	binary_hex_represintation(result, dest, (length / 2));
 	free(result);
 
+	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);

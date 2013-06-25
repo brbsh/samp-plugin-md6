@@ -61,13 +61,11 @@ void binary_hex_represintation(unsigned char *binary, char *digest, int length)
 	static const char hexits[17] = "0123456789abcdef";
 
 	if((length % 2))
-		length++;
+		length--;
 
-	for(int i = 0; i != length; i++) 
+	for(int i = 0; i < length; i++) 
 	{
 		digest[i * 2] = hexits[binary[i] >> 4];
 		digest[(i * 2) + 1] = hexits[binary[i] & 0x0F];
 	}
-
-	digest[length * 2] = NULL;
 }

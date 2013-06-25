@@ -9,20 +9,20 @@
 
 
 
-#if defined 				_md6_included
+#if defined 			_md6_included
 	#endinput
 #endif
 
-#define 					_md6_included
+#define 				_md6_included
 
 
-#define MD6_MAX_LENGTH		(128 + 1)
+#define MD6_MAX_LEN		(128 + 1)
 
 
 
 
 
-#pragma tabsize 			8
+#pragma tabsize 		8
 
 
 
@@ -34,4 +34,4 @@ native md6_hmac(dest[], source[], key[], size = sizeof dest);
 
 
 
-#pragma tabsize 			4
+#pragma tabsize 		4
