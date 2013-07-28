@@ -1,10 +1,14 @@
 #pragma once
+#pragma warning(disable:4244)
 
 
+
+#ifdef LINUX
+	#include <alloca.h>
+#endif
 
 #include <fstream>
 #include <string>
-#include <string.h>
 
 #define HAVE_STDINT_H
 
@@ -24,7 +28,5 @@
 
 
 typedef void (*logprintf_t)(char *format, ...);
-
-
 
 void binary_hex_represintation(unsigned char *binary, char *digest, int length);

@@ -8,9 +8,10 @@
 
 
 
-extern void *pAMXFunctions;
-
 logprintf_t logprintf;
+
+
+extern void *pAMXFunctions;
 
 
 
@@ -28,7 +29,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
     pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
     logprintf = (logprintf_t)ppData[PLUGIN_DATA_LOGPRINTF];
 
-    logprintf("  MD6 plugin loaded.");
+    logprintf("  MD6 plugin v1.0.4 loaded");
 
     return true;
 }
@@ -37,7 +38,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()
 {
-	logprintf("  MD6 plugin unloaded.");
+	logprintf("  MD6 plugin v1.0.4 unloaded");
 }
 
 

@@ -6,7 +6,6 @@
 #include "md6/md6.h"
 #include "md6/md6_compress.c"
 #include "md6/md6_mode.c"
-
 #include "natives.h"
 
 
@@ -48,7 +47,7 @@ cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 
 	if(length < 129)
 	{
-		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
+		logprintf("\nMD6 warning: string size must be greater than 128 cells\n");
 
 		return NULL;
 	}
@@ -63,20 +62,20 @@ cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 		return NULL;
 	}
 
-	result = (unsigned char *)malloc(length);
+	result = new unsigned char[length];
+	dest = new char[length];
 
 	md6_hash(512, (unsigned char *)buffer, strlen(buffer), result);
-
-	dest = (char *)malloc(length);
-
 	binary_hex_represintation(result, dest, (length / 2));
-	free(result);
+	
+	delete[] result;
 
 	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);
-	free(dest);
+
+	delete[] dest;
 
 	return length;
 }
@@ -101,7 +100,7 @@ cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 
 	if(length < 129)
 	{
-		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
+		logprintf("\nMD6 warning: string size must be greater than 128 cells\n");
 
 		return NULL;
 	}
@@ -120,34 +119,39 @@ cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 
 	if(!io.good())
 	{
-		logprintf("\nMD6 warning: Error while opening file %s for hashing\n", file);
+		logprintf("\nMD6 warning: Error while opening file '%s' for hashing\n", file);
 
 		return NULL;
 	}
 
-	result = (unsigned char *)malloc(length);
+	result = new unsigned char[length];
 
 	io.seekg(NULL, io.end);
+
 	int filesize = io.tellg();
+
 	io.seekg(NULL, io.beg);
 
-	dest = (char *)malloc(filesize);
+	dest = new char[filesize];
+
 	io.read(dest, filesize);
 	io.close();
 
 	md6_hash(512, (unsigned char *)dest, filesize, result);
 
-	free(dest);
-	dest = (char *)malloc(length);
+	delete[] dest;
+	dest = new char[length];
 
 	binary_hex_represintation(result, dest, (length / 2));
-	free(result);
+
+	delete[] result;
 
 	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);
-	free(dest);
+	
+	delete[] dest;
 
 	return length;
 }
@@ -173,7 +177,7 @@ cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 
 	if(length < 129)
 	{
-		logprintf("\nMD6 warning: string size must be less than 128 cells\n");
+		logprintf("\nMD6 warning: string size must be greater than 128 cells\n");
 
 		return NULL;
 	}
@@ -196,20 +200,20 @@ cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 		return NULL;
 	}
 
-	result = (unsigned char *)malloc(length);
+	result = new unsigned char[length];
+	dest = new char[length];
 
 	md6_full_hash(512, (unsigned char *)buffer, strlen(buffer), (unsigned char *)hmac, strlen(hmac), md6_default_L, md6_default_r(512, NULL), result);
-	
-	dest = (char *)malloc(length);
-
 	binary_hex_represintation(result, dest, (length / 2));
-	free(result);
+	
+	delete[] result;
 
 	dest[(length - 1)] = NULL;
 	amx_SetString(addr, dest, NULL, NULL, length);
 
 	length = strlen(dest);
-	free(dest);
+	
+	delete[] dest;
 
 	return length;
 }
