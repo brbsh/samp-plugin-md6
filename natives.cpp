@@ -42,8 +42,9 @@ cell AMX_NATIVE_CALL amxNatives::MD6(AMX *amx, cell *params)
 	char *buffer = NULL;
 	char *dest = NULL;
 	unsigned char *result = NULL;
-	cell *addr = NULL;
 	int length = params[3];
+
+	cell *addr = NULL;
 
 	if(length < 129)
 	{
@@ -95,8 +96,9 @@ cell AMX_NATIVE_CALL amxNatives::MD6_file(AMX *amx, cell *params)
 	char *file = NULL;
 	char *dest = NULL;
 	unsigned char *result = NULL;
-	cell *addr = NULL;
 	int length = params[3];
+
+	cell *addr = NULL;
 
 	if(length < 129)
 	{
@@ -172,8 +174,9 @@ cell AMX_NATIVE_CALL amxNatives::MD6_hmac(AMX *amx, cell *params)
 	char *dest = NULL;
 	char *hmac = NULL;
 	unsigned char *result = NULL;
-	cell *addr = NULL;
 	int length = params[4];
+
+	cell *addr = NULL;
 
 	if(length < 129)
 	{

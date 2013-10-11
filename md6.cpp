@@ -29,16 +29,16 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
     pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
     logprintf = (logprintf_t)ppData[PLUGIN_DATA_LOGPRINTF];
 
-    logprintf("  MD6 plugin v1.0.4 loaded");
+    logprintf("  MD6 v%s by BJIADOKC loaded", PLUGIN_VERSION);
 
-    return true;
+    return 1;
 }
 
 
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()
 {
-	logprintf("  MD6 plugin v1.0.4 unloaded");
+	logprintf("  MD6 v%s by BJIADOKC unloaded", PLUGIN_VERSION);
 }
 
 
