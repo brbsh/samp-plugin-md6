@@ -5,12 +5,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md6", "md6.vcxproj", "{84A8
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84A85268-91DE-43A0-B404-120356EBF3F5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{84A85268-91DE-43A0-B404-120356EBF3F5}.Debug|Win32.Build.0 = Debug|Win32
 		{84A85268-91DE-43A0-B404-120356EBF3F5}.Release|Win32.ActiveCfg = Release|Win32
 		{84A85268-91DE-43A0-B404-120356EBF3F5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
